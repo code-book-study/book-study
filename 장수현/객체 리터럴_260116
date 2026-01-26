@@ -49,3 +49,64 @@ console.log(card); // Object { suit: "하트", value: 14 }
 ```
 
 없는 프로퍼티 이름에 값을 대입하면 새로운 프로퍼티가 추가됨
+
+## in : 프로퍼티 유무 확인 연산자
+
+```jsx
+var card = { suit: "하트", rank: "a" } 
+console.log("suit" in card); // true
+console.log("color" in card); // false
+```
+
+in 연산자가 조사하는 대상 = 그 객체가 가진 프로퍼티 + 그 객체가 **상속받은** 모든 프로퍼티
+
+```jsx
+console.log("toString" in card); // true
+```
+
+`card`가 `Object` 객체를 상속 받았기 때문에, `card` 객체 안에 `toString` 프로퍼티가 없어도 있다는 결과가 나옴
+
+## 객체 리터럴 예제
+
+```jsx
+// 좌표평면 점을 표현하는 객체
+var p = {x: 1.0, y: 2.5 };
+
+// 원 표현 객체
+var circle = {
+		center: { x: 1.0, y: 2.0 }, // 원의 중점 (객체 프로퍼티로 객체 대입 가능)
+		radius: 2.5 // 원의 반지름
+};
+circle.center.x // 1.0
+
+// 회원 정보 표현 객체
+var person = {
+		name: "이정규",
+		age: 18,
+		sex: "남",
+		married: false
+};
+```
+
+## 메서드
+
+프로퍼티에 저장된 값의 타입이 함수면 그 프로퍼티를 **메서드**라 부름. (이후 추가적으로 정리)
+
+## 객체 → 참조 타입
+
+생성된 객체는 메모리의 영역을 차지하는 한 덩어리가 됨.
+
+객체 타입의 값을 변수에 대입 시 그 변수에는 객체의 **참조**(메모리 내 위치)가 저장됨. (var card = {…};)
+
+이때의 변수 상태를 가리켜 객체를 **참조하고 있다**고 함.
+
+```jsx
+var card = { suit: "하트", rank: "a" } // 변수 card는 객체를 참조하고 있음 
+
+var a = card; // 변수 a는 card와 같은 객체를 참조함
+
+console.log(a.suit); // 하트
+a.suit = "스페이드";
+console.log(a.suit); // 스페이드
+console.log(card.suit); // 스페이드
+```
